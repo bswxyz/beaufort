@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>
+  document.documentElement.classList.add('js');
+  try { var t = localStorage.getItem('beaufort-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<title>How Beaufort was built — Parable build guide</title>
+<meta name="description" content="A build guide for Beaufort: the idea, the stack, the scroll-driven compass on an inline-SVG sea chart, the details that matter, and how to ship it on GitHub Pages." />
+<meta name="robots" content="index,follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  .doc { width: min(100% - 2.4rem, 820px); margin: 2rem auto 5rem; position: relative; z-index: 1; }
+  .doc-back { display: inline-flex; align-items: center; gap: .4rem; color: var(--dim); text-decoration: none; font-size: .86rem; margin-bottom: 1.6rem; }
+  .doc-back:hover { color: var(--ink); }
+  .doc h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: .4rem 0 .3rem; font-weight: 600; }
+  .doc .lede { margin-bottom: 2.4rem; }
+  .doc h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 2.6rem 0 .6rem; }
+  .doc p { color: var(--dim); margin: .7rem 0; }
+  .doc p strong { color: var(--ink); font-weight: 700; }
+  .doc ul { color: var(--dim); padding-left: 1.1rem; margin: .7rem 0; }
+  .doc li { margin: .35rem 0; }
+  .doc a.inl { color: var(--accent-ink); }
+  pre { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem; overflow-x: auto; margin: 1rem 0; }
+  code { font-family: var(--font-m); font-size: .82rem; }
+  pre code { color: var(--ink); line-height: 1.6; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.2rem 0; }
+  .tag-row span { font-family: var(--font-m); font-size: .72rem; padding: .3rem .6rem; border: 1px solid var(--line); border-radius: 999px; color: var(--dim); }
+  .callout { border-left: 3px solid var(--accent); background: color-mix(in oklab, var(--accent) 6%, transparent); padding: .9rem 1.1rem; border-radius: 0 10px 10px 0; margin: 1.4rem 0; }
+  .callout p { margin: 0; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="film" aria-hidden="true"></div>
+<main class="doc">
+  <a class="doc-back" href="../">← Back to Beaufort</a>
+  <p class="eyebrow mono">[ Parable build guide ]</p>
+  <h1>How Beaufort was built</h1>
+  <p class="lede">A charter house, drawn as a chart. The signature is an <strong>inline-SVG sea
+    chart</strong> — isobaths, soundings, a rhumb-line network and a real compass rose — whose
+    <strong>needle rotates to track scroll progress</strong>, so your heading changes as you sail
+    down the page. No canvas, no libraries, no image files.</p>
+
+  <div class="tag-row">
+    <span>static · no build step</span><span>inline SVG · zero deps</span><span>Spectral / Karla / IBM Plex Mono</span><span>light + dark</span><span>reduced-motion aware</span>
+  </div>
+
+  <h2>The idea</h2>
+  <p>A boutique yacht charter sells one thing above the boats: trust in the people who navigate them.
+    So the hero isn't a drone shot of a yacht — it's the thing the crew actually reads. A cartographic
+    chart, rendered in vector so its lines stay hair-thin at any size, with the one flourish a photo
+    can never give you: a compass that <em>responds</em>. Scroll down and the needle swings, as if the
+    boat were slowly changing course. The romance of the brand is the navigation, so the navigation is
+    the interface.</p>
+
+  <h2>The stack</h2>
+  <p>Deliberately plain. One <code>index.html</code>, one <code>styles.css</code>, one
+    <code>main.js</code>. No framework, no bundler, no CDN — the chart is hand-authored SVG right in
+    the markup, so there are zero runtime dependencies and nothing to build. Type is Spectral (a
+    lyrical text serif for the display voice), Karla (a warm grotesque for body), and IBM Plex Mono
+    for everything a navigator would set in a fixed pitch: soundings, bearings, distances, coordinates.</p>
+
+  <h2>Signature technique — the scroll-driven compass</h2>
+  <p>The compass rose is authored once in SVG — outer ring, an eight-point star, two-tone cardinal
+    points, and a needle isolated in its own <code>&lt;g id="roseNeedle"&gt;</code>. On scroll we map
+    page progress to a bearing and rotate the needle group about the rose's centre. One fixed tell-tale
+    badge, bottom-left, mirrors the same bearing in degrees so the heading is legible even after the
+    chart scrolls away.</p>
+  <pre><code>const START = 20, SWEEP = 300;          // sweep 20° → 320° over the page
+const update = () =&gt; {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  const p   = clamp(scrollY / max, 0, 1);
+  const deg = START + p * SWEEP;
+  needle.setAttribute('transform', `rotate(${deg} 468 158)`);   // rose centre
+  ttDeg.textContent = String(Math.round(deg % 360)).padStart(3,'0') + '°';
+};
+addEventListener('scroll', () =&gt; requestAnimationFrame(update), { passive: true });</code></pre>
+  <p>The charter route is a dashed <code>&lt;path&gt;</code> revealed on load by animating a
+    <code>clipPath</code> rectangle from <code>scaleX(0)</code> to <code>scaleX(1)</code> — so the
+    course appears to be laid down across the water — while a faint gradient band sweeps the sea as a
+    slow shimmer. Both are pure CSS; only the needle needs JavaScript.</p>
+
+  <h2>Details that matter</h2>
+  <ul>
+    <li><strong>Cheap by construction.</strong> There's no render loop — the needle only moves in a
+      scroll handler, and that handler is throttled to one <code>requestAnimationFrame</code> per
+      frame. The shimmer and route-draw are GPU-friendly CSS animations.</li>
+    <li><strong>Reduced motion is honest.</strong> Under <code>prefers-reduced-motion</code> the
+      chart is a single, fully-drawn still: the needle sits at a fixed 042°, the route is already
+      complete, the shimmer is off and the tell-tale is hidden. No scroll listener is attached.</li>
+    <li><strong>Content is never hidden without JS.</strong> The hero rise, the reveals and the
+      route-draw are gated behind a <code>.js</code> class set synchronously in <code>&lt;head&gt;</code>.
+      Kill JavaScript and the whole chart and page render, fully legible.</li>
+    <li><strong>Real cartography, not decoration.</strong> Soundings are in fathoms, the scale bar is
+      in nautical miles, tidal diamonds carry letters, and the cartouche names the chart — the detail
+      is what sells the fiction.</li>
+    <li><strong>Two themes, one flip.</strong> Night-passage navy and paper-chart cream are the same
+      tokens inverted on <code>:root[data-theme]</code>; the chart, the sail plans and the whole page
+      re-tint from one switch, persisted to <code>localStorage</code>.</li>
+  </ul>
+
+  <div class="callout"><p>The enquiry form is a demo — it validates and confirms in-place but sends
+    nothing. Wire it to your own endpoint (Formspree, a serverless function, an email service) before
+    taking real bookings.</p></div>
+
+  <h2>Ship it on GitHub Pages</h2>
+  <p>Nothing to build. Push the folder and point Pages at the root.</p>
+  <pre><code>gh repo create bswxyz/beaufort --public --source . --push
+gh api --method POST /repos/bswxyz/beaufort/pages -f 'source[branch]=main' -f 'source[path]=/'</code></pre>
+  <p>Relative paths and a <code>.nojekyll</code> file mean it serves from the project subpath without
+    a single config change — the whole point of a static build.</p>
+
+  <a class="doc-back" href="../" style="margin-top:2.6rem">← Back to Beaufort</a>
+</main>
+</body>
+</html>

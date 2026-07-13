@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>
+  document.documentElement.classList.add('js');
+  try { var t = localStorage.getItem('beaufort-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<title>Beaufort — classic yacht charter under sail</title>
+<meta name="description" content="Beaufort is a small charter house of classic yachts and the crews who know them. Bespoke passages under sail — the Western Approaches, the Hebrides, the Norwegian leads — navigated by chart, log and dead reckoning." />
+<meta name="theme-color" content="#0b1622" />
+<meta name="color-scheme" content="dark light" />
+<meta property="og:title" content="Beaufort — classic yacht charter under sail" />
+<meta property="og:description" content="A small charter house of classic yachts. Bespoke passages under sail, kept the old way — by chart, log and dead reckoning." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<div class="film" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="./" aria-label="Beaufort home">
+    <svg class="brand-mark" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+      <circle cx="14" cy="14" r="11.5" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".5"/>
+      <path d="M14 3.5 L16.4 14 L14 24.5 L11.6 14 Z" fill="currentColor"/>
+      <path d="M3.5 14 L14 11.6 L24.5 14 L14 16.4 Z" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".6"/>
+      <circle cx="14" cy="14" r="1.5" fill="currentColor"/>
+    </svg>
+    <span class="brand-word">Beaufort</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#fleet">The fleet</a>
+    <a href="#passages">Passages</a>
+    <a href="#crew">The crew</a>
+    <a href="./guide/">Guide</a>
+    <a class="nav-cta" href="#book">Book a passage</a>
+    <button id="themeBtn" class="theme-btn" type="button" aria-pressed="true" aria-label="Switch to light mode" title="Toggle chart / night">
+      <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><g stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></g></svg>
+      <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============ hero — animated sea chart ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow mono">[ Est. 2008 · classic yachts · West Country ]</p>
+        <h1 id="hero-title" class="hero-title">
+          <span class="line"><span>We sail the</span></span>
+          <span class="line"><span><em>long</em> way</span></span>
+          <span class="line"><span>on purpose.</span></span>
+        </h1>
+        <p class="hero-sub">Beaufort is a small charter house of classic yachts and the crews who
+          know them. Bespoke passages under sail — the Western Approaches, the Hebrides, the
+          Norwegian leads — kept the old way: by chart, log and dead reckoning.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#passages">See the passages</a>
+          <a class="btn btn-ghost" href="#fleet">Meet the fleet →</a>
+        </div>
+        <dl class="hero-facts">
+          <div><dt class="mono">Home port</dt><dd>Dartmouth</dd></div>
+          <div><dt class="mono">Season</dt><dd>Apr — Oct</dd></div>
+          <div><dt class="mono">In commission</dt><dd><span class="c-num" data-to="4">0</span> yachts</dd></div>
+        </dl>
+      </div>
+
+      <figure class="chart-fig" aria-labelledby="chart-cap">
+        <div class="chart-panel">
+          <svg id="chart" class="chart" viewBox="0 0 640 480" role="img"
+               aria-label="A stylised nautical sea chart of the Western Approaches — faint depth contours, scattered soundings in fathoms, a radiating rhumb-line network from a compass rose, and one dashed charter route weaving from harbour out to open sea.">
+            <defs>
+              <clipPath id="chartClip"><rect x="0" y="0" width="640" height="480"/></clipPath>
+              <clipPath id="routeReveal"><rect id="routeRevealRect" x="0" y="0" width="640" height="480"/></clipPath>
+            </defs>
+
+            <g clip-path="url(#chartClip)">
+              <!-- water / paper -->
+              <rect x="0" y="0" width="640" height="480" fill="var(--chart-bg)"/>
+
+              <!-- rhumb-line network, radiating from the rose and a secondary node -->
+              <g class="rhumb" stroke="var(--chart-faint)" stroke-width="0.7" fill="none">
+                <line x1="468" y1="158" x2="-140" y2="158"/>
+                <line x1="468" y1="158" x2="1076" y2="158"/>
+                <line x1="468" y1="158" x2="468" y2="-140"/>
+                <line x1="468" y1="158" x2="468" y2="758"/>
+                <line x1="468" y1="158" x2="38" y2="588"/>
+                <line x1="468" y1="158" x2="898" y2="-272"/>
+                <line x1="468" y1="158" x2="898" y2="588"/>
+                <line x1="468" y1="158" x2="38" y2="-272"/>
+                <line x1="468" y1="158" x2="90" y2="588"/>
+                <line x1="468" y1="158" x2="846" y2="588"/>
+                <!-- secondary node, lower-left -->
+                <line x1="150" y1="360" x2="640" y2="360" opacity=".7"/>
+                <line x1="150" y1="360" x2="150" y2="-120" opacity=".7"/>
+                <line x1="150" y1="360" x2="560" y2="-40" opacity=".7"/>
+                <line x1="150" y1="360" x2="480" y2="480" opacity=".7"/>
+              </g>
+
+              <!-- isobaths (depth contours) -->
+              <g class="isobath" fill="none" stroke="var(--chart-line)" stroke-width="0.9" opacity=".55">
+                <path d="M-10 250 C 60 250 90 300 150 315 C 230 335 205 405 250 480"/>
+                <path d="M-10 210 C 70 214 120 268 185 288 C 275 316 250 410 300 480"/>
+                <path d="M-10 176 C 84 182 150 240 226 262 C 320 290 300 420 352 480"/>
+                <!-- island contours, upper-left -->
+                <path d="M74 92 C 100 74 138 82 148 108 C 158 134 130 156 104 152 C 80 148 62 120 74 92 Z"/>
+                <path d="M64 86 C 96 60 150 70 162 108 C 172 142 136 172 100 166 C 66 160 46 118 64 86 Z" opacity=".7"/>
+              </g>
+
+              <!-- land — headland (lower-left) and island (upper-left) -->
+              <g class="land">
+                <path d="M-10 480 L-10 288 C 46 292 78 330 130 344 C 196 362 168 430 214 480 Z"
+                      fill="var(--land)" stroke="var(--land-edge)" stroke-width="1.1" stroke-linejoin="round"/>
+                <path d="M84 96 C 104 82 136 90 144 112 C 151 132 128 150 106 146 C 86 142 70 116 84 96 Z"
+                      fill="var(--land)" stroke="var(--land-edge)" stroke-width="1.1" stroke-linejoin="round"/>
+                <!-- coastal hatching on the headland -->
+                <g stroke="var(--land-edge)" stroke-width="0.6" opacity=".5">
+                  <path d="M12 300 l7 -9 M40 314 l7 -9 M70 330 l7 -9 M100 344 l6 -9 M126 356 l6 -8"/>
+                </g>
+              </g>
+
+              <!-- soundings — depths in fathoms -->
+              <g class="soundings mono" fill="var(--sounding)" font-size="10.5" font-family="'IBM Plex Mono', monospace">
+                <text x="246" y="123">15</text>
+                <text x="326" y="93">19</text>
+                <text x="406" y="72">24</text>
+                <text x="296" y="182">12</text>
+                <text x="240" y="252">9</text>
+                <text x="196" y="222">11</text>
+                <text x="346" y="252">14</text>
+                <text x="426" y="302">17</text>
+                <text x="356" y="342">13</text>
+                <text x="278" y="360">8</text>
+                <text x="516" y="242">26</text>
+                <text x="556" y="184">29</text>
+                <text x="466" y="360">21</text>
+                <text x="536" y="382">23</text>
+                <text x="198" y="152">7</text>
+                <text x="150" y="204">5</text>
+                <text x="330" y="422">10</text>
+                <text x="418" y="432">16</text>
+                <text x="252" y="432">12</text>
+              </g>
+
+              <!-- tidal diamonds & a wreck -->
+              <g class="marks">
+                <g class="tidal">
+                  <path d="M300 292 l8 8 l-8 8 l-8 -8 Z" fill="none" stroke="var(--accent-line)" stroke-width="1.2"/>
+                  <text x="300" y="304" text-anchor="middle" fill="var(--accent-line)" font-size="8.5" font-family="'IBM Plex Mono', monospace">A</text>
+                </g>
+                <g class="tidal">
+                  <path d="M392 172 l8 8 l-8 8 l-8 -8 Z" fill="none" stroke="var(--accent-line)" stroke-width="1.2"/>
+                  <text x="392" y="184" text-anchor="middle" fill="var(--accent-line)" font-size="8.5" font-family="'IBM Plex Mono', monospace">B</text>
+                </g>
+                <g class="wreck" stroke="var(--chart-line)" stroke-width="1" fill="none">
+                  <path d="M498 318 h16 M506 310 v16 M501 313 l10 10 M511 313 l-10 10"/>
+                  <text x="520" y="322" fill="var(--sounding)" font-size="8.5" font-family="'IBM Plex Mono', monospace">Wk</text>
+                </g>
+              </g>
+
+              <!-- water shimmer — a slow light band over the sea -->
+              <rect class="chart-sheen" x="-260" y="0" width="240" height="480" fill="url(#sheenGrad)" opacity="0" pointer-events="none"/>
+              <defs>
+                <linearGradient id="sheenGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="var(--sheen)" stop-opacity="0"/>
+                  <stop offset="0.5" stop-color="var(--sheen)" stop-opacity="1"/>
+                  <stop offset="1" stop-color="var(--sheen)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <!-- the charter route -->
+              <g clip-path="url(#routeReveal)">
+                <path class="route-line" d="M126 344 C 196 322 236 300 300 300 C 360 300 388 260 430 224 C 480 182 520 150 560 96"
+                      fill="none" stroke="var(--accent-line)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 7"/>
+                <g class="route-wp" fill="none" stroke="var(--accent-line)" stroke-width="1.3">
+                  <path d="M296 296 l8 8 M304 296 l-8 8"/>
+                  <path d="M426 220 l8 8 M434 220 l-8 8"/>
+                </g>
+                <!-- departure buoy -->
+                <circle cx="126" cy="344" r="3.2" fill="var(--accent-line)"/>
+                <circle cx="126" cy="344" r="6.5" fill="none" stroke="var(--accent-line)" stroke-width="1"/>
+                <!-- landfall star -->
+                <g transform="translate(560 96)">
+                  <path d="M0 -9 L2.2 -2.4 L9 -2.4 L3.4 1.6 L5.6 8.4 L0 4.3 L-5.6 8.4 L-3.4 1.6 L-9 -2.4 L-2.2 -2.4 Z"
+                        fill="var(--accent-line)"/>
+                </g>
+              </g>
+
+              <!-- compass rose -->
+              <g class="rose" transform="translate(0 0)">
+                <circle cx="468" cy="158" r="70" fill="none" stroke="var(--rose)" stroke-width="1"/>
+                <circle cx="468" cy="158" r="61" fill="none" stroke="var(--rose)" stroke-width="0.6" opacity=".7"/>
+                <circle cx="468" cy="158" r="50" fill="none" stroke="var(--chart-line)" stroke-width="0.6" opacity=".5"/>
+                <!-- degree ticks every 30° -->
+                <g class="rose-ticks" stroke="var(--rose)" stroke-width="1">
+                  <line x1="468" y1="88" x2="468" y2="98"/>
+                  <line x1="558" y1="158" x2="548" y2="158"/>
+                  <line x1="468" y1="228" x2="468" y2="218"/>
+                  <line x1="398" y1="158" x2="408" y2="158"/>
+                  <line x1="528.6" y1="97.4" x2="521.5" y2="104.5"/>
+                  <line x1="528.6" y1="218.6" x2="521.5" y2="211.5"/>
+                  <line x1="407.4" y1="218.6" x2="414.5" y2="211.5"/>
+                  <line x1="407.4" y1="97.4" x2="414.5" y2="104.5"/>
+                </g>
+                <!-- 8-point star -->
+                <path class="rose-star" d="M468,108 L474.9,141.4 L503.4,122.6 L484.6,151.1 L518,158 L484.6,164.9 L503.4,193.4 L474.9,174.6 L468,208 L461.1,174.6 L432.6,193.4 L451.4,164.9 L418,158 L451.4,151.1 L432.6,122.6 L461.1,141.4 Z"
+                      fill="var(--rose-fill)" stroke="var(--rose)" stroke-width="0.7"/>
+                <!-- two-tone cardinal points -->
+                <g class="rose-cardinals">
+                  <path d="M468,108 L461,150 L468,158 Z" fill="var(--rose-dk)"/>
+                  <path d="M468,108 L475,150 L468,158 Z" fill="var(--rose-lt)"/>
+                  <path d="M518,158 L476,152 L468,158 Z" fill="var(--rose-lt)"/>
+                  <path d="M518,158 L476,164 L468,158 Z" fill="var(--rose-dk)"/>
+                  <path d="M468,208 L461,166 L468,158 Z" fill="var(--rose-lt)"/>
+                  <path d="M468,208 L475,166 L468,158 Z" fill="var(--rose-dk)"/>
+                  <path d="M418,158 L460,152 L468,158 Z" fill="var(--rose-dk)"/>
+                  <path d="M418,158 L460,164 L468,158 Z" fill="var(--rose-lt)"/>
+                </g>
+                <!-- cardinal letters -->
+                <g class="rose-letters" fill="var(--chart-ink)" font-family="'Spectral', serif" font-size="13" text-anchor="middle">
+                  <text x="468" y="84">N</text>
+                  <text x="574" y="163">E</text>
+                  <text x="468" y="246">S</text>
+                  <text x="362" y="163">W</text>
+                </g>
+                <!-- the rotating needle -->
+                <g id="roseNeedle" transform="rotate(20 468 158)">
+                  <path d="M468 100 L473 158 L463 158 Z" fill="var(--accent-line)"/>
+                  <path d="M468 216 L473 158 L463 158 Z" fill="var(--needle-s)"/>
+                  <circle cx="468" cy="158" r="4.5" fill="var(--rose)" stroke="var(--chart-bg)" stroke-width="1"/>
+                </g>
+              </g>
+
+              <!-- neatline (chart border) + graticule ticks -->
+              <g class="neatline" fill="none" stroke="var(--chart-line)">
+                <rect x="6" y="6" width="628" height="468" stroke-width="1.4"/>
+                <rect x="12" y="12" width="616" height="456" stroke-width="0.6" opacity=".6"/>
+                <g stroke-width="0.8">
+                  <path d="M60 12 v6 M120 12 v6 M180 12 v6 M240 12 v6 M300 12 v6 M360 12 v6 M420 12 v6 M480 12 v6 M540 12 v6 M600 12 v6"/>
+                  <path d="M60 468 v-6 M120 468 v-6 M180 468 v-6 M240 468 v-6 M300 468 v-6 M360 468 v-6 M420 468 v-6 M480 468 v-6 M540 468 v-6 M600 468 v-6"/>
+                  <path d="M12 60 h6 M12 120 h6 M12 180 h6 M12 240 h6 M12 300 h6 M12 360 h6 M12 420 h6"/>
+                  <path d="M628 60 h-6 M628 120 h-6 M628 180 h-6 M628 240 h-6 M628 300 h-6 M628 360 h-6 M628 420 h-6"/>
+                </g>
+              </g>
+              <g class="grat-labels mono" fill="var(--sounding)" font-size="8" font-family="'IBM Plex Mono', monospace">
+                <text x="20" y="28">50°10′N</text>
+                <text x="566" y="28">06°00′W</text>
+              </g>
+
+              <!-- scale bar -->
+              <g class="scalebar" transform="translate(60 446)">
+                <rect x="0" y="0" width="30" height="5" fill="var(--chart-ink)"/>
+                <rect x="30" y="0" width="30" height="5" fill="var(--chart-bg)" stroke="var(--chart-ink)" stroke-width="0.8"/>
+                <rect x="60" y="0" width="30" height="5" fill="var(--chart-ink)"/>
+                <rect x="90" y="0" width="30" height="5" fill="var(--chart-bg)" stroke="var(--chart-ink)" stroke-width="0.8"/>
+                <g fill="var(--sounding)" font-size="8" font-family="'IBM Plex Mono', monospace" text-anchor="middle">
+                  <text x="0" y="18">0</text>
+                  <text x="60" y="18">5</text>
+                  <text x="120" y="18">10 nm</text>
+                </g>
+              </g>
+
+              <!-- cartouche -->
+              <g class="cartouche">
+                <rect x="404" y="392" width="222" height="70" rx="3" fill="var(--cartouche)" stroke="var(--chart-line)" stroke-width="1"/>
+                <text x="416" y="414" fill="var(--chart-ink)" font-family="'Spectral', serif" font-size="15" font-style="italic">Chart No. 12</text>
+                <text x="416" y="432" fill="var(--chart-ink)" font-family="'IBM Plex Mono', monospace" font-size="9" letter-spacing="1.5">WESTERN APPROACHES</text>
+                <text x="416" y="450" fill="var(--sounding)" font-family="'IBM Plex Mono', monospace" font-size="8" letter-spacing="0.5">SOUNDINGS IN FATHOMS · 1:120 000</text>
+              </g>
+            </g>
+          </svg>
+          <div class="chart-grain" aria-hidden="true"></div>
+        </div>
+        <figcaption id="chart-cap" class="chart-cap mono">
+          <span>PLATE 12 — the Western Approaches</span>
+          <span>compass tracks your heading as you scroll</span>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="hero-scroll mono" aria-hidden="true">scroll — cast off</p>
+  </section>
+
+  <!-- ============ the fleet ============ -->
+  <section id="fleet" class="fleet">
+    <span class="wm" aria-hidden="true">FLEET</span>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker mono reveal">[ The fleet ]</p>
+        <h2 class="reveal">Four yachts, each with a temper.</h2>
+        <p class="lede reveal">Wooden hulls and long keels, kept in commission the expensive way —
+          because a boat you can trust in a following sea is not the one that looks fastest at the
+          dock. Every one is skippered; you crew as much or as little as you like.</p>
+      </div>
+
+      <div class="fleet-grid">
+        <article class="yacht reveal">
+          <div class="yacht-art">
+            <svg viewBox="0 0 280 180" aria-hidden="true" focusable="false" class="sailplan">
+              <!-- waterline -->
+              <line x1="8" y1="150" x2="272" y2="150" class="waterline"/>
+              <!-- hull: bermudan sloop, long overhangs -->
+              <path d="M40 150 C 60 158 210 158 240 150 C 224 138 190 134 140 134 C 96 134 62 138 40 150 Z" class="hull"/>
+              <!-- mast + boom -->
+              <line x1="120" y1="134" x2="120" y2="34" class="spar"/>
+              <line x1="120" y1="132" x2="196" y2="132" class="spar"/>
+              <!-- mainsail -->
+              <path d="M122 40 L122 128 L192 128 Z" class="sail"/>
+              <!-- genoa -->
+              <path d="M118 46 L118 128 L52 128 Z" class="sail sail--fore"/>
+              <!-- burgee -->
+              <path d="M120 34 l14 5 l-14 5 Z" class="burgee"/>
+            </svg>
+          </div>
+          <div class="yacht-info">
+            <div class="yacht-top"><h3>Kestrel</h3><span class="yacht-rig mono">Bermudan sloop</span></div>
+            <p class="yacht-note">The fast one. A 1962 sloop that heels hard and forgives nothing —
+              she rewards a light hand on the helm and punishes a heavy one.</p>
+            <dl class="specs mono">
+              <div><dt>LOA</dt><dd>48 ft</dd></div>
+              <div><dt>Berths</dt><dd>4</dd></div>
+              <div><dt>Built</dt><dd>1962</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="yacht reveal">
+          <div class="yacht-art">
+            <svg viewBox="0 0 280 180" aria-hidden="true" focusable="false" class="sailplan">
+              <line x1="8" y1="150" x2="272" y2="150" class="waterline"/>
+              <!-- hull: gaff cutter, deep counter stern -->
+              <path d="M34 150 C 54 160 216 160 250 148 C 236 137 196 132 138 132 C 90 132 54 138 34 150 Z" class="hull"/>
+              <!-- mast, gaff, boom, bowsprit -->
+              <line x1="128" y1="132" x2="128" y2="26" class="spar"/>
+              <line x1="128" y1="130" x2="206" y2="130" class="spar"/>
+              <line x1="128" y1="52" x2="182" y2="30" class="spar"/>
+              <line x1="250" y1="148" x2="278" y2="146" class="spar"/>
+              <!-- gaff mainsail (quadrilateral) -->
+              <path d="M130 52 L182 32 L202 126 L130 126 Z" class="sail"/>
+              <!-- topsail -->
+              <path d="M130 48 L128 26 L178 30 Z" class="sail sail--top"/>
+              <!-- staysail + jib -->
+              <path d="M124 60 L124 126 L74 126 Z" class="sail sail--fore"/>
+              <path d="M120 66 L120 126 L276 144 Z" class="sail sail--fore" opacity=".82"/>
+              <path d="M128 26 l14 5 l-14 5 Z" class="burgee"/>
+            </svg>
+          </div>
+          <div class="yacht-info">
+            <div class="yacht-top"><h3>Perdita</h3><span class="yacht-rig mono">Gaff cutter</span></div>
+            <p class="yacht-note">The old lady. Built 1928, gaff-rigged and bowsprit-proud — slow to
+              tack, glorious on a reach, and the only berth aboard with a coal stove.</p>
+            <dl class="specs mono">
+              <div><dt>LOA</dt><dd>56 ft</dd></div>
+              <div><dt>Berths</dt><dd>6</dd></div>
+              <div><dt>Built</dt><dd>1928</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="yacht reveal">
+          <div class="yacht-art">
+            <svg viewBox="0 0 280 180" aria-hidden="true" focusable="false" class="sailplan">
+              <line x1="8" y1="150" x2="272" y2="150" class="waterline"/>
+              <!-- hull: ketch -->
+              <path d="M30 150 C 52 159 220 159 252 149 C 238 138 198 133 140 133 C 88 133 50 139 30 150 Z" class="hull"/>
+              <!-- main mast + mizzen -->
+              <line x1="112" y1="133" x2="112" y2="24" class="spar"/>
+              <line x1="112" y1="131" x2="180" y2="131" class="spar"/>
+              <line x1="206" y1="133" x2="206" y2="66" class="spar"/>
+              <line x1="206" y1="131" x2="248" y2="131" class="spar"/>
+              <!-- main + mizzen sails -->
+              <path d="M114 30 L114 127 L178 127 Z" class="sail"/>
+              <path d="M208 72 L208 127 L246 127 Z" class="sail sail--miz"/>
+              <!-- headsails -->
+              <path d="M108 40 L108 127 L46 127 Z" class="sail sail--fore"/>
+              <path d="M112 24 l14 5 l-14 5 Z" class="burgee"/>
+            </svg>
+          </div>
+          <div class="yacht-info">
+            <div class="yacht-top"><h3>Saskia</h3><span class="yacht-rig mono">Bermudan ketch</span></div>
+            <p class="yacht-note">The long-hauler. Two masts to spread the load, so you can shorten
+              sail without waking the off-watch. Built 1971 for passages that don't end at dusk.</p>
+            <dl class="specs mono">
+              <div><dt>LOA</dt><dd>62 ft</dd></div>
+              <div><dt>Berths</dt><dd>6</dd></div>
+              <div><dt>Built</dt><dd>1971</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="yacht reveal">
+          <div class="yacht-art">
+            <svg viewBox="0 0 280 180" aria-hidden="true" focusable="false" class="sailplan">
+              <line x1="8" y1="150" x2="272" y2="150" class="waterline"/>
+              <!-- hull: folkboat, clinker, pretty double-ender -->
+              <path d="M58 150 C 76 157 196 157 222 150 C 208 140 178 136 140 136 C 100 136 74 140 58 150 Z" class="hull"/>
+              <line x1="132" y1="136" x2="132" y2="52" class="spar"/>
+              <line x1="132" y1="134" x2="192" y2="134" class="spar"/>
+              <path d="M134 58 L134 130 L190 130 Z" class="sail"/>
+              <path d="M130 62 L130 130 L82 130 Z" class="sail sail--fore"/>
+              <path d="M132 52 l12 4 l-12 4 Z" class="burgee"/>
+            </svg>
+          </div>
+          <div class="yacht-info">
+            <div class="yacht-top"><h3>Wren</h3><span class="yacht-rig mono">Folkboat sloop</span></div>
+            <p class="yacht-note">The little one. A 1958 clinker folkboat for day sails and short
+              hops — two berths, no frills, and the best classroom afloat for learning to feel a boat.</p>
+            <dl class="specs mono">
+              <div><dt>LOA</dt><dd>25 ft</dd></div>
+              <div><dt>Berths</dt><dd>2</dd></div>
+              <div><dt>Built</dt><dd>1958</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ passages ============ -->
+  <section id="passages" class="passages">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker mono reveal">[ Passages ]</p>
+        <h2 class="reveal">Where the fleet goes.</h2>
+        <p class="lede reveal">Set routes we know in every weather, or the seed of one you bring us.
+          Distances are rhumb-line and honest; the sea will add to them. The forecast is a
+          suggestion — <em>the sea keeps its own counsel.</em></p>
+      </div>
+
+      <ul class="passage-list" id="passageList">
+        <li class="passage reveal">
+          <div class="passage-map" aria-hidden="true">
+            <svg viewBox="0 0 120 64" class="mini-route" focusable="false">
+              <path d="M6 20 C 26 12 34 30 52 30 C 74 30 86 48 112 44" class="mr-land"/>
+              <path d="M14 48 C 40 44 58 24 78 22 C 94 20 104 30 114 24" class="mr-line"/>
+              <circle cx="14" cy="48" r="2.6" class="mr-a"/>
+              <path d="M114 24 l1.8 -5 l1.8 5 l-1.8 5 Z" class="mr-b"/>
+            </svg>
+          </div>
+          <div class="passage-body">
+            <div class="passage-head">
+              <h3>The Western Approaches</h3>
+              <span class="passage-legs mono">Falmouth · Scillies · Falmouth</span>
+            </div>
+            <p class="passage-note">Out past the Manacles to the Isles of Scilly, anchoring where the
+              chart runs out of names. A classic first passage — open water, but never far from a lee.</p>
+          </div>
+          <div class="passage-stats mono">
+            <span class="ps-num"><span class="c-num" data-to="240">0</span> <em>nm</em></span>
+            <span class="ps-sub">6 nights · Kestrel</span>
+          </div>
+        </li>
+
+        <li class="passage reveal">
+          <div class="passage-map" aria-hidden="true">
+            <svg viewBox="0 0 120 64" class="mini-route" focusable="false">
+              <path d="M8 14 C 24 22 22 40 40 42 C 62 44 66 22 88 24 C 104 25 108 40 116 38" class="mr-land"/>
+              <path d="M18 44 C 34 40 40 26 58 26 C 78 26 86 40 108 34" class="mr-line"/>
+              <circle cx="18" cy="44" r="2.6" class="mr-a"/>
+              <path d="M108 34 l1.8 -5 l1.8 5 l-1.8 5 Z" class="mr-b"/>
+            </svg>
+          </div>
+          <div class="passage-body">
+            <div class="passage-head">
+              <h3>Hebridean Traverse</h3>
+              <span class="passage-legs mono">Oban · Sound of Mull · Small Isles</span>
+            </div>
+            <p class="passage-note">Sheltered water and big scenery — the Sound of Mull, then out to
+              Muck, Eigg and Rùm. Tidal gates to time and seals to keep the dawn watch company.</p>
+          </div>
+          <div class="passage-stats mono">
+            <span class="ps-num"><span class="c-num" data-to="180">0</span> <em>nm</em></span>
+            <span class="ps-sub">5 nights · Saskia</span>
+          </div>
+        </li>
+
+        <li class="passage reveal">
+          <div class="passage-map" aria-hidden="true">
+            <svg viewBox="0 0 120 64" class="mini-route" focusable="false">
+              <path d="M4 40 C 22 34 30 46 48 46 C 70 46 78 30 100 32" class="mr-land"/>
+              <path d="M16 44 C 36 40 50 26 68 26 C 88 26 96 34 110 30" class="mr-line"/>
+              <circle cx="16" cy="44" r="2.6" class="mr-a"/>
+              <path d="M110 30 l1.8 -5 l1.8 5 l-1.8 5 Z" class="mr-b"/>
+            </svg>
+          </div>
+          <div class="passage-body">
+            <div class="passage-head">
+              <h3>The Channel Islands</h3>
+              <span class="passage-legs mono">Dartmouth · Guernsey · Sark</span>
+            </div>
+            <p class="passage-note">A short, tide-ruled hop to the last of the old Channel anchorages.
+              Sark has no cars and Sark has no rush; the tidal streams see to the rest.</p>
+          </div>
+          <div class="passage-stats mono">
+            <span class="ps-num"><span class="c-num" data-to="95">0</span> <em>nm</em></span>
+            <span class="ps-sub">3 nights · Perdita</span>
+          </div>
+        </li>
+
+        <li class="passage reveal">
+          <div class="passage-map" aria-hidden="true">
+            <svg viewBox="0 0 120 64" class="mini-route" focusable="false">
+              <path d="M10 52 C 22 40 20 24 34 20 C 52 15 54 34 70 32 C 90 30 92 14 114 12" class="mr-land"/>
+              <path d="M16 50 C 30 40 34 24 50 22 C 70 20 78 34 106 22" class="mr-line"/>
+              <circle cx="16" cy="50" r="2.6" class="mr-a"/>
+              <path d="M106 22 l1.8 -5 l1.8 5 l-1.8 5 Z" class="mr-b"/>
+            </svg>
+          </div>
+          <div class="passage-body">
+            <div class="passage-head">
+              <h3>The Norwegian Leads</h3>
+              <span class="passage-legs mono">Bergen · Sognefjord · the skerries north</span>
+            </div>
+            <p class="passage-note">Inside the skerries where the water goes still and black, threading
+              the leads north from Bergen. Long light, cold nights, and depths the lead line won't reach.</p>
+          </div>
+          <div class="passage-stats mono">
+            <span class="ps-num"><span class="c-num" data-to="320">0</span> <em>nm</em></span>
+            <span class="ps-sub">8 nights · Saskia</span>
+          </div>
+        </li>
+
+        <li class="passage reveal">
+          <div class="passage-map" aria-hidden="true">
+            <svg viewBox="0 0 120 64" class="mini-route" focusable="false">
+              <path d="M6 26 C 26 26 34 40 54 40 C 76 40 84 24 114 26" class="mr-land"/>
+              <path d="M14 42 C 34 40 46 30 64 30 C 84 30 92 40 108 36" class="mr-line"/>
+              <circle cx="14" cy="42" r="2.6" class="mr-a"/>
+              <path d="M108 36 l1.8 -5 l1.8 5 l-1.8 5 Z" class="mr-b"/>
+            </svg>
+          </div>
+          <div class="passage-body">
+            <div class="passage-head">
+              <h3>The Solent Classic</h3>
+              <span class="passage-legs mono">Cowes · Beaulieu · Yarmouth</span>
+            </div>
+            <p class="passage-note">A weekend of sheltered short-tacking and the finest harbours in the
+              south — for a first taste of the fleet, or a last one before the boats come ashore.</p>
+          </div>
+          <div class="passage-stats mono">
+            <span class="ps-num"><span class="c-num" data-to="60">0</span> <em>nm</em></span>
+            <span class="ps-sub">2 nights · Wren</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ the crew ============ -->
+  <section id="crew" class="crew">
+    <span class="wm" aria-hidden="true">CREW</span>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker mono reveal">[ The crew ]</p>
+        <h2 class="reveal">You are in good hands.</h2>
+        <p class="lede reveal">Every passage is skippered by someone who has made it before, often
+          in worse weather than you'll ever see. They are quiet, unhurried, and very hard to alarm.</p>
+      </div>
+
+      <div class="crew-grid">
+        <article class="skipper reveal">
+          <div class="skipper-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" focusable="false"><circle cx="32" cy="32" r="30" class="sk-ring"/><path d="M32 12 L35 32 L32 52 L29 32 Z" class="sk-n"/><path d="M12 32 L32 29 L52 32 L32 35 Z" class="sk-e"/><circle cx="32" cy="32" r="2.4" class="sk-c"/></svg>
+          </div>
+          <h3>Iain Rasmussen</h3>
+          <p class="skipper-role mono">Master · Kestrel & Saskia</p>
+          <p class="skipper-bio">Forty years at sea, half of them delivering other people's yachts
+            across the Atlantic. Navigates by GPS and checks it against the stars out of habit. Will
+            not raise his voice, even when you'd understand it if he did.</p>
+          <p class="skipper-tick mono">RYA Yachtmaster Ocean · 84,000 nm logged</p>
+        </article>
+
+        <article class="skipper reveal">
+          <div class="skipper-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" focusable="false"><circle cx="32" cy="32" r="30" class="sk-ring"/><path d="M32 12 L35 32 L32 52 L29 32 Z" class="sk-n"/><path d="M12 32 L32 29 L52 32 L32 35 Z" class="sk-e"/><circle cx="32" cy="32" r="2.4" class="sk-c"/></svg>
+          </div>
+          <h3>Marta Holm</h3>
+          <p class="skipper-role mono">Mate & navigator · Perdita</p>
+          <p class="skipper-bio">Grew up sailing the Norwegian leads and knows every rock in them by
+            its first name. Keeps the paper chart up to date because she doesn't trust a screen to
+            survive a knockdown. Bakes bread on passage; the galley is her watch.</p>
+          <p class="skipper-tick mono">RYA Yachtmaster Offshore · celestial nav</p>
+        </article>
+
+        <article class="skipper reveal">
+          <div class="skipper-mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64" focusable="false"><circle cx="32" cy="32" r="30" class="sk-ring"/><path d="M32 12 L35 32 L32 52 L29 32 Z" class="sk-n"/><path d="M12 32 L32 29 L52 32 L32 35 Z" class="sk-e"/><circle cx="32" cy="32" r="2.4" class="sk-c"/></svg>
+          </div>
+          <h3>Edvard Solheim</h3>
+          <p class="skipper-role mono">Bosun & relief skipper · Wren</p>
+          <p class="skipper-bio">Shipwright by trade — he built half of Wren's interior with his own
+            hands and can fix anything aboard with what's already aboard. Teaches the knots, the
+            reef, and the reason a boat under sail is quieter than any room ashore.</p>
+          <p class="skipper-tick mono">Shipwright · Coastal Skipper · 22 seasons</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ stats band ============ -->
+  <section class="log-band" aria-label="Beaufort in numbers">
+    <span class="wm" aria-hidden="true">DEAD RECKONING</span>
+    <div class="wrap logs">
+      <div class="log reveal">
+        <span class="log-num"><span class="c-num" data-to="84000">0</span></span>
+        <span class="log-lbl mono">nautical miles logged</span>
+        <span class="log-cap">roughly four times around the world</span>
+      </div>
+      <div class="log reveal">
+        <span class="log-num"><span class="c-num" data-to="18">0</span></span>
+        <span class="log-lbl mono">seasons afloat</span>
+        <span class="log-cap">since the first charter in 2008</span>
+      </div>
+      <div class="log reveal">
+        <span class="log-num"><span class="c-num" data-to="130">0</span></span>
+        <span class="log-lbl mono">ports of call</span>
+        <span class="log-cap">from Falmouth to the Lofoten wall</span>
+      </div>
+      <div class="log reveal">
+        <span class="log-num"><span class="c-num" data-to="0">0</span></span>
+        <span class="log-lbl mono">passages cancelled by weather</span>
+        <span class="log-cap">postponed, yes. we wait for the sea</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ book a passage ============ -->
+  <section id="book" class="book">
+    <div class="wrap book-grid">
+      <div class="book-info">
+        <p class="kicker kicker--buoy mono reveal">[ Book a passage ]</p>
+        <h2 class="reveal">Tell us your latitude.</h2>
+        <p class="book-sub reveal">Every charter begins with a conversation, not a calendar. Where
+          you'd like to wake up, how much you want to do on deck, and whether you've sailed before —
+          we'll shape a passage around the answer and put you in the log.</p>
+        <ul class="book-list mono">
+          <li>Skippered charter — crew as much or as little as you like</li>
+          <li>All provisioning, harbour dues and fuel included</li>
+          <li>Weather windows honoured; safety is never the adventure</li>
+        </ul>
+      </div>
+      <div class="book-form reveal" aria-live="polite">
+        <form id="bookForm" novalidate>
+          <div class="field">
+            <label class="mono" for="bName">Name</label>
+            <input id="bName" name="name" type="text" required autocomplete="name" placeholder="Your name" />
+          </div>
+          <div class="field">
+            <label class="mono" for="bEmail">Email</label>
+            <input id="bEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="mono" for="bDates">Rough dates</label>
+              <input id="bDates" name="dates" type="text" autocomplete="off" placeholder="e.g. late June" />
+            </div>
+            <div class="field">
+              <label class="mono" for="bParty">Party size</label>
+              <input id="bParty" name="party" type="number" min="1" max="6" inputmode="numeric" placeholder="2" />
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Put me in the log</button>
+          <p class="book-fine mono" id="bookFine">Demo form — nothing is sent. See the README.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-top">
+    <span class="foot-brand">Beaufort</span>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#fleet">The fleet</a><a href="#passages">Passages</a><a href="#crew">The crew</a><a href="#book">Book a passage</a><a href="./guide/">Guide</a>
+    </nav>
+  </div>
+  <div class="wrap foot-bottom mono">
+    <span>© 2026 Beaufort — a design-showcase concept, not a real charter house. Yachts, crew, prices and passages are fiction; check a real forecast before you sail.</span>
+    <span>Designed &amp; built by Parable · <a href="./guide/">How this was built →</a></span>
+  </div>
+</footer>
+
+<div class="telltale mono" id="telltale" aria-hidden="true">
+  <svg viewBox="0 0 40 40" focusable="false">
+    <circle cx="20" cy="20" r="18" class="tt-ring"/>
+    <text x="20" y="9" text-anchor="middle" class="tt-n">N</text>
+    <g id="ttNeedle">
+      <path d="M20 6 L23 20 L17 20 Z" class="tt-north"/>
+      <path d="M20 34 L23 20 L17 20 Z" class="tt-south"/>
+    </g>
+    <circle cx="20" cy="20" r="2" class="tt-hub"/>
+  </svg>
+  <span id="ttDeg">020°</span>
+</div>
+
+<script src="./main.js" defer></script>
+</body>
+</html>
