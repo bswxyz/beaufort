@@ -1,11 +1,43 @@
-# Beaufort
+<!-- parable:beautified -->
+<div align="center">
 
-**Live:** https://bswxyz.github.io/beaufort/ · **Build notes:** https://bswxyz.github.io/beaufort/guide/
+<h1>Beaufort</h1>
+
+<p><strong>Classic-yacht charter — an animated inline-SVG sea chart whose compass rose tracks your scroll heading.</strong></p>
+
+<p>
+  <a href="https://bswxyz.github.io/beaufort/"><img alt="Live demo" src="https://img.shields.io/badge/demo-live-8b5cf6?style=flat-square&labelColor=1a1a1a"></a>
+  <img alt="Family" src="https://img.shields.io/badge/family-Parable-ec4899?style=flat-square&labelColor=1a1a1a">
+  <img alt="Stack" src="https://img.shields.io/badge/stack-HTML%2FJS-f5a623?style=flat-square&labelColor=1a1a1a">
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-22c55e?style=flat-square&labelColor=1a1a1a"></a>
+</p>
+
+<p>
+  <a href="https://bswxyz.github.io/beaufort/"><b>Live demo</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://bswxyz.github.io/beaufort/guide/">Build notes</a>
+  &nbsp;·&nbsp;
+  <a href="https://parable-three.vercel.app/templates">More templates</a>
+</p>
+
+<a href="https://bswxyz.github.io/beaufort/">
+  <img src=".github/preview.jpg" alt="Beaufort — live preview" width="100%">
+</a>
+
+</div>
+
+**Use this template** — copy the source into a new project:
+
+```bash
+npx degit bswxyz/beaufort my-app
+```
+
+
 
 A boutique classic-yacht charter site — an animated, hand-authored SVG **sea chart** whose compass
 needle rotates to track scroll progress, a fleet of bespoke inline-SVG sail plans, a list of charter
 passages with tiny route drawings, and quietly premium maritime copy. Part of the
-[Parable design showcase](https://bswxyz.github.io/fable-hub/).
+[Parable design showcase](https://parable-three.vercel.app).
 
 ---
 
@@ -85,4 +117,4 @@ SVGs, the full light/dark theming, and the whole responsive / reduced-motion / k
 
 ## License
 
-[MIT](LICENSE). Design & build by **Parable** (Anthropic's Claude).
+[MIT](LICENSE). Design & build by **Parable**.
